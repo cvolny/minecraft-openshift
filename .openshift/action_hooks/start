@@ -3,5 +3,9 @@
 # script. The application will work only if it binds to
 # $OPENSHIFT_INTERNAL_IP:8080
 #nohup $OPENSHIFT_REPO_DIR/diy/testrubyserver.rb $OPENSHIFT_INTERNAL_IP $OPENSHIFT_REPO_DIR/diy > $OPENSHIFT_HOMEDIR/diy-0.1/logs/server.log 2>&1 &
+#nohup bash -c "exec 'java' '-jar' 'minecraft_server.jar' '-Xms256M' '-Xmx490M' '-nogui' &> ${OPENSHIFT_DIY_LOG_DIR}minecraft.log" &> /dev/null &
+
+TMUX_SESSION="minecraft-volny"
+
 cd $OPENSHIFT_DATA_DIR
-nohup bash -c "exec 'java' '-jar' 'minecraft_server.jar' '-Xms256M' '-Xmx490M' '-nogui' &> ${OPENSHIFT_DIY_LOG_DIR}minecraft.log" &> /dev/null &
+nohup tmux new -s $TMUX_SESSION "java -Xincgc -Xms256M -Xmx490M -jar minecraft_server.jar -nogui &> ${OPENSHIFT_DIY_LOG_DIR}minecraft.log"
