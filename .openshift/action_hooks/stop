@@ -3,6 +3,7 @@ TMUX_SESSION="minecraft-volny"
 WARNING_MESSAGE="Server is shutting down now!"
 
 tmux send -t $TMUX_SESSION "say $WARNING_MESSAGE" C-m
+tmux send -t $TMUX_SESSION "save-all" C-m
 tmux send -t $TMUX_SESSION "stop" C-m
 
 exit 0
