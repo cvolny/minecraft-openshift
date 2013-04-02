@@ -3,4 +3,4 @@ TMUX_SESSION="minecraft-volny"
 JAVA_OPS="-Xincgc -Xms256M -Xmx490M"
 LOGFILE="${OPENSHIFT_DIY_LOG_DIR}minecraft.log"
 
-(cd $OPENSHIFT_DATA_DIR; tmux new -s $TMUX_SESSION "java $JAVA_OPS -jar minecraft_server.jar -nogui &> $LOGFILE")
+(cd $OPENSHIFT_DATA_DIR; tmux new -d -s $TMUX_SESSION "java $JAVA_OPS -jar minecraft_server.jar -nogui &> $LOGFILE")
