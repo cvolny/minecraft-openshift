@@ -28,7 +28,11 @@ fi
 if [ -f "$TMP_FILENAME.tar.bz2" ]; then
 	rm -f $TMP_FILENAME.tar.bz2
 fi
-tar -cpf $TMP_FILENAME.tar $OPENSHIFT_DATA_DIR/world
+if [ -d "$OPENSHIFT_DATA_DIR/world.working ]; then
+	rm -rf $OPENSHIFT_DATA_DIR/world.working
+fi
+cp -ar $OPENSHIFT_DATA_DIR/world $OPENSHIFT_DATA_DIR/world.working
+tar -cpf $TMP_FILENAME.tar $OPENSHIFT_DATA_DIR/world.working
 bzip2 $TMP_FILENAME.tar
 echo $TMP_FILENAME.tar.bz2
 
