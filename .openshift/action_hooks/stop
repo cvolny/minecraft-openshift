@@ -1,10 +1,8 @@
 #!/bin/bash
 TMUX_SESSION="minecraft-volny"
 WARNING_MESSAGE="Server is shutting down now!"
-WARNING_SLEEP=3
 
 tmux send -t $TMUX_SESSION "say $WARNING_MESSAGE" C-m
-sleep $WARNING_SLEEP
 tmux send -t $TMUX_SESSION "stop" C-m
 
 exit 0

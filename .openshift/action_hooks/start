@@ -3,4 +3,10 @@ TMUX_SESSION="minecraft-volny"
 JAVA_OPS="-Xincgc -Xms256M -Xmx490M"
 LOGFILE="${OPENSHIFT_DIY_LOG_DIR}minecraft.log"
 
+while [ true ]; do
+	netstat -anp 2> /dev/null | grep $OPENSHIFT_INTERNAL_IP:$OPENSHIFT_INTERNAL_PORT > /dev/null
+	if [ $? -ne 0 ]; then
+		break
+	fi
+done
 (cd $OPENSHIFT_DATA_DIR; tmux new -d -s $TMUX_SESSION "java $JAVA_OPS -jar minecraft_server.jar -nogui &> $LOGFILE")

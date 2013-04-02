@@ -23,18 +23,20 @@ done
 
 # Do backup
 if [ -f "$TMP_FILENAME.tar" ]; then
-	rm -f $TMP_FILENAME.tar
+	rm -f "$TMP_FILENAME.tar"
 fi
 if [ -f "$TMP_FILENAME.tar.bz2" ]; then
-	rm -f $TMP_FILENAME.tar.bz2
+	rm -f "$TMP_FILENAME.tar.bz2"
 fi
-if [ -d "$OPENSHIFT_DATA_DIR/world.working" ]; then
-	rm -rf $OPENSHIFT_DATA_DIR/world.working
+if [ -d "${OPENSHIFT_DATA_DIR}world.working" ]; then
+	rm -rf "${OPENSHIFT_DATA_DIR}world.working"
 fi
-cp -ar $OPENSHIFT_DATA_DIR/world $OPENSHIFT_DATA_DIR/world.working
-tar -cpf $TMP_FILENAME.tar $OPENSHIFT_DATA_DIR/world.working
-bzip2 $TMP_FILENAME.tar
-echo $TMP_FILENAME.tar.bz2
+cp -ar "${OPENSHIFT_DATA_DIR}world" "${OPENSHIFT_DATA_DIR}world.working"
+tar -cpf "$TMP_FILENAME.tar" "${OPENSHIFT_DATA_DIR}world.working"
+bzip2 "$TMP_FILENAME.tar"
+if [ -f "$TMP_FILENAME.tar.bz2" ]; then
+	echo "$TMP_FILENAME.tar.bz2"
+fi
 
 # Re-enable auto saving
 tmux send -t $TMUX_SESSION "save-on" C-m
